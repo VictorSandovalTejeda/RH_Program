@@ -10,7 +10,7 @@ package rh;
  * @author Alumnos
  */
 public class Operario extends Empleado{
-    private int horaextra;
+    private int horaextra = 0;
     private boolean tieneregalias;
 
     public Operario(String nombre, double sueldo, int horaextra, boolean regalias) {
@@ -22,6 +22,12 @@ public class Operario extends Empleado{
     public int getHoraextra() {
         return horaextra;
     }
+
+    public boolean isTieneregalias() {
+        return tieneregalias;
+    }
+    
+    
     
     
     
