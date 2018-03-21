@@ -24,15 +24,16 @@ public class RH {
         int opcion = 0;
         MenuOpciones m = new MenuOpciones();
 
-        System.out.println("------------------------");
-        System.out.println(Console_Colors.ANSI_BLUE + "    RECURSOS HUMANOS" + Console_Colors.ANSI_RESET);
+        System.out.println("--------------------------------------------");
+        System.out.println("         RECURSOS HUMANOS VSANDOVAL");
         do {
             try {
-                System.out.println("-----Menu Principal-----");
+                System.out.println("--------------------------------------------");
+                System.out.println("---------------" + Console_Colors.ANSI_PURPLE + "Menu Principal" + Console_Colors.ANSI_RESET + "---------------");
                 System.out.println("1. Ingresar Empleados");
                 System.out.println("2. Ver Empleados");
                 System.out.println("3. Salir");
-                System.out.println("------------------------");
+                System.out.println("--------------------------------------------");
                 System.out.print(">>");
                 opcion = sc.nextInt();
 
@@ -51,7 +52,9 @@ public class RH {
                         break;
                 }
             } catch (InputMismatchException e) {
-
+                System.out.println(Console_Colors.ANSI_RED + "**Ingreso un dato Invalido." + Console_Colors.ANSI_RESET);
+                System.out.println();
+                sc.nextLine();
             }
         } while (opcion != 3);
     }

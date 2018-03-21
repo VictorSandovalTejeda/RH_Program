@@ -25,9 +25,9 @@ public class MenuOpciones {
         String nombre;
         double sueldo;
 
-        try {
-            do {
-                System.out.println("Cuantos empleados va a ingresar?                    " + Console_Colors.ANSI_CYAN + "←Ingrese <0> para regresar" + Console_Colors.ANSI_RESET);
+        do {
+            try {
+                System.out.println("Cuantos empleados va a ingresar?                    " + Console_Colors.ANSI_BLUE + "←Ingrese <0> para regresar" + Console_Colors.ANSI_RESET);
                 cantEmp = sc.nextInt();
                 if (cantEmp >= 1) {
                     arregloEmpleado = new Empleado[cantEmp];
@@ -78,24 +78,28 @@ public class MenuOpciones {
                 } else {
 
                 }
-            } while (cantEmp != 0);
-        } catch (InputMismatchException e) {
-            System.out.println(Console_Colors.ANSI_RED + "Ingreso un dato invalido" + Console_Colors.ANSI_RESET);
-        }
+            } catch (InputMismatchException e) {
+                System.out.println(Console_Colors.ANSI_RED + "**Ingreso un dato invalido" + Console_Colors.ANSI_RESET);
+                System.out.println();
+                sc.nextLine();
+            }
+        } while (cantEmp != 0);
+
     }
 
     public void OpcionVer() {
         int opcion = 0;
-        try {
-            do {
-                System.out.println("Que tipo de Empleado desea ver?                    " + Console_Colors.ANSI_CYAN + "←Ingrese <0> para regresar" + Console_Colors.ANSI_RESET);
+
+        do {
+            try {
+                System.out.println("Que tipo de Empleado desea ver?                    " + Console_Colors.ANSI_BLUE + "←Ingrese <0> para regresar" + Console_Colors.ANSI_RESET);
                 System.out.println("-----Tipo Empleado-----");
                 System.out.println("1. Gerentes");
                 System.out.println("2. Operarios");
                 System.out.println("-----------------------");
                 System.out.print(">>");
                 opcion = sc.nextInt();
-
+                System.out.println();
                 switch (opcion) {
                     case 1:
                         Gerente temp;
@@ -109,9 +113,7 @@ public class MenuOpciones {
                         for (int i = 0; i < arregloEmpleado.length; i++) {
                             if (arregloEmpleado[i] instanceof Gerente) {
                                 temp = (Gerente) arregloEmpleado[i];
-                                tieneCarro = colorearBoolean(temp.isTieneCarro());
-                                vacaciones = colorearBoolean(temp.isVacacionesPagadas());
-                                System.out.printf("%-20s%-10s%-9s%-10s%n", arregloEmpleado[i].getNombre(), arregloEmpleado[i].getSueldo(), colorearBoolean(temp.isTieneCarro()), colorearBoolean(temp.isVacacionesPagadas()));
+                                System.out.printf("%-20s%-10s%-9s%-10s%n", arregloEmpleado[i].getNombre(), arregloEmpleado[i].getSueldo(), convertirBoolean(temp.isTieneCarro()), convertirBoolean(temp.isVacacionesPagadas()));
                             }
                         }
                         System.out.println("__________________________________________________");
@@ -119,19 +121,15 @@ public class MenuOpciones {
                         break;
                     case 2:
                         Operario tmp;
-                        String horasExtra;
-                        String regalias;
                         System.out.println("__________________________________________________");
                         System.out.println(Console_Colors.ANSI_PURPLE + "                    OPERARIOS                     " + Console_Colors.ANSI_RESET);
                         System.out.println("__________________________________________________");
-                        System.out.printf("%-20s%-10s%-9s%-12s%n", "NOMBRE", "SUELDO", "H.E.", "REGALIA");
+                        System.out.printf("%-20s%-10s%-10s%-10s%n", "NOMBRE", "SUELDO", "H.E.", "REGALIA");
                         System.out.println("__________________________________________________");
                         for (int i = 0; i < arregloEmpleado.length; i++) {
                             if (arregloEmpleado[i] instanceof Operario) {
                                 tmp = (Operario) arregloEmpleado[i];
-                                horasExtra = colorearHE(tmp.getHoraextra());
-                                regalias = colorearBoolean(tmp.isTieneregalias());
-                                System.out.printf("%-20s%-10s%-9s%-12s%n", arregloEmpleado[i].getNombre(), arregloEmpleado[i].getSueldo(), colorearHE(tmp.getHoraextra()), colorearBoolean(tmp.isTieneregalias()));
+                                System.out.printf("%-20s%-10s%-10d%-10s%n", arregloEmpleado[i].getNombre(), arregloEmpleado[i].getSueldo(), tmp.getHoraextra(), convertirBoolean(tmp.isTieneregalias()));
                             }
                         }
                         System.out.println("__________________________________________________");
@@ -140,29 +138,25 @@ public class MenuOpciones {
                     default:
                         break;
                 }
+            } catch (InputMismatchException e) {
+                System.out.println(Console_Colors.ANSI_RED + "**Ingreso un dato invalido" + Console_Colors.ANSI_RESET);
+                System.out.println();
+                sc.nextLine();
+            }
 
-            } while (opcion != 0);
-        } catch (InputMismatchException e) {
-            System.out.println(Console_Colors.ANSI_RED + "Ingreso un dato invalido" + Console_Colors.ANSI_RESET);
-        }
+        } while (opcion != 0);
+
     }
 
-    public String colorearHE(int horasextras) {
+    public String convertirBoolean(boolean b) {
+        String temp;
 
-        if (horasextras <= 0) {
-            return Console_Colors.ANSI_RED + horasextras + Console_Colors.ANSI_RESET;
+        if (b == false) {
+            temp = "No";
         } else {
-            return Console_Colors.ANSI_GREEN + horasextras + Console_Colors.ANSI_RESET;
+            temp = "Si";
         }
-    }
-
-    public String colorearBoolean(boolean arg) {
-
-        if (arg == false) {
-            return Console_Colors.ANSI_RED + "NO" + Console_Colors.ANSI_RESET;
-        } else {
-            return Console_Colors.ANSI_GREEN + "SI" + Console_Colors.ANSI_RESET;
-        }
+        return temp;
     }
 
 }
